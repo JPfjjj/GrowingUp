@@ -1,0 +1,60 @@
+/**
+ * [蓝桥杯2023初赛] 日期统计
+ * [B组C/C++】【1】
+ * 
+ * 八重循环判断
+ */
+# include <iostream>
+# include <set>
+using namespace std;
+int a[1001];
+int main()
+{
+    set<int> ans;
+    for(int i = 0; i < 100; i++)
+    {
+        cin>>a[i];
+    }
+    for(int i = 0; i < 100; i++)
+    {
+        for(int j = i + 1; j < 100; j++)
+        {
+            for(int k = j + 1; k < 100; k++)
+            {
+                for(int l = k + 1; l < 100; l++)
+                {
+                    int year = a[i] * 1000 + a[j] * 100 + a[k] * 10 + a[l];
+                    if(year == 2023)   //以上先循环每个位数来确定下来2023年
+                    {
+                        for(int o = l + 1; o < 100; o++)
+                        {
+                            for(int p = o + 1; p < 100; p++)
+                            {
+                                for(int q = p + 1; q < 100; q++)
+                                {
+                                    for(int r = q + 1; r < 100; r++)
+                                    {
+                                        int month = a[o] * 10 + a[p];
+                                        int day = a[q] * 10 + a[r];
+                                        if((month >= 1 && month <= 12) && (day >= 1 && day <= 31))  //以上遍历所有的数组是为了找到符合月份和日期的条件，仍然是按照位数来排序的。
+                                        {
+                                            int temp = year * 1000 + month * 100 + day;
+                                            ans.insert(temp);  //最后算出来的放在set数组里面，这个set自己会去重
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    cout<<ans.size();
+    return 0;
+}
+/**cin
+5 6 8 6 9 1 6 1 2 4 9 1 9 8 2 3 6 4 7 7 5 9 5 0 3 8 7 5 8 1 5 8 6 1 8 3 0 3 7 9 2
+7 0 5 8 8 5 7 0 9 9 1 9 4 4 6 8 6 3 3 8 5 1 6 3 4 6 7 0 7 8 2 7 6 8 9 5 6 5 6 1 4 0 1
+0 0 9 4 8 0 9 1 2 8 5 0 2 5 3 3
+*/
