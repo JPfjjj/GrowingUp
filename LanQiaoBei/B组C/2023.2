@@ -1,0 +1,19 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    int sum = 23333333;
+    for (int i = 1; i < sum / 2; i++) {
+        double p = 0;
+        double a = i * 1.0 / sum;
+        double b = (sum - i) * 1.0 / sum;
+        p -= a * log2(a) * i + b * log2(b) * (sum - i);
+        if (fabs(p - 11625907.5798) < 0.0001) { //fabs定义于cmath中，返回float型；abs定义于stdlib.h中，返回int型
+            printf("%d", i);
+            //printf("11027421");
+            break;
+        }
+    }
+    return 0;
+}
